@@ -1,7 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class ScoresHolder
 {
+
+    public static event Action<int> ScoreChange;
     private const string ScoreKey = "Scores";
 
     public static int MaximumScores 
@@ -17,6 +20,7 @@ public class ScoresHolder
         set
         {
             _scores = value;
+            ScoreChange?.Invoke(_scores);
             if (_scores > MaximumScores)
             {
                 MaximumScores = _scores;

@@ -764,7 +764,7 @@ GameObject:
   - component: {fileID: 178620318}
   - component: {fileID: 178620319}
   m_Layer: 0
-  m_Name: Treasure
+  m_Name: TreasureSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -812,6 +812,7 @@ MonoBehaviour:
   - {fileID: 1466550458}
   - {fileID: 1395743268}
   - {fileID: 687467452}
+  _offset: 5
   _spawnDistance: 1
   _amount: 100
 --- !u!1001 &184020660
@@ -4410,6 +4411,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1234981626}
+  - component: {fileID: 1234981627}
   m_Layer: 0
   m_Name: TreeTop
   m_TagString: Untagged
@@ -4432,6 +4434,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1234981627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234981625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4c96606dae4e77a8d019ebb2b1bdb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _thresholds:
+  - Score: 0
+    Picture: {fileID: 1826144144}
+  - Score: 10
+    Picture: {fileID: 1656146133}
+  - Score: 20
+    Picture: {fileID: 1776894351}
 --- !u!1001 &1237344502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4830,7 +4851,7 @@ GameObject:
   - component: {fileID: 1365727545}
   - component: {fileID: 1365727544}
   m_Layer: 0
-  m_Name: Treasure (1)
+  m_Name: DangerousSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4851,6 +4872,7 @@ MonoBehaviour:
   _prefabs:
   - {fileID: 6077619308046130038, guid: 19c09b8955ddc4846ab4783fd5b3e9c0, type: 3}
   _predefinedCollectibles: []
+  _offset: 5
   _spawnDistance: 2
   _amount: 100
 --- !u!4 &1365727545
