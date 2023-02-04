@@ -1,9 +1,8 @@
 using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
-public class Root : MonoBehaviour, IDragHandler, IBeginDragHandler
+public class Root : MonoBehaviour
 {
 
     [SerializeField]
@@ -20,12 +19,10 @@ public class Root : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     [SerializeField]
     private MeshCollider _meshCollider;
-
-    [SerializeField]
-    private float _directionChange;
     
     private Vector3 _direction = Vector3.down;
-    private bool _isDragging;
+
+    public Vector3 EndPosition => _rootLine.GetPosition(_rootLine.positionCount - 1);
 
     public void Update()
     {
@@ -60,18 +57,9 @@ public class Root : MonoBehaviour, IDragHandler, IBeginDragHandler
         _direction = Quaternion.Euler(0, 0, Random.Range(-_growTurnAngle, _growTurnAngle)) * _direction;
     }
     
-    public void OnBeginDrag(PointerEventData eventData)
+    public void SetDirection(Vector3 direction)
     {
-        _isDragging = true;
+        _direction = direction;
     }
-    
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (_isDragging)
-            _direction = eventData.delta.normalized;
-        _isDragging = false;
-    }
-    
-
 }
 
