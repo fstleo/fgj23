@@ -426,8 +426,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxY: 0
-  _cameraTransform: {fileID: 963194228}
+  _camera: {fileID: 0}
   _mouseSensitivity: 0.5
+  _zoomSensitivity: 0
 --- !u!1 &1480952331
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,14 +455,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1480952331}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c5c51d80e20453eb08877d46ee86b8a, type: 3}
+  m_Script: {fileID: 11500000, guid: b023bc3a9ce44f97b580dd98a271a0e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefabs:
-  - {fileID: 8922208749486499359, guid: 8206b18900bd19d40b38b777fa2b658e, type: 3}
-  _predefinedCollectibles: []
-  _spawnDistance: 2
-  _amount: 100
+  _pause: 3
 --- !u!4 &1480952333
 Transform:
   m_ObjectHideFlags: 0

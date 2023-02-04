@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class CollectibleSpawner : MonoBehaviour
 {
@@ -26,16 +28,16 @@ public class CollectibleSpawner : MonoBehaviour
 
     private void SpawnTreasure(int index)
     {
-        var collectible = Instantiate(_prefabs[Random.Range(0, _prefabs.Length)], transform.position + Quaternion.Euler(0,0, Random.Range(-60,60)) * Vector3.down * _spawnDistance * index, Quaternion.identity);
+        var collectible = Instantiate(
+            _prefabs[Random.Range(0, _prefabs.Length)],
+            transform.position + Quaternion.Euler(0,0, Random.Range(-60,60)) * Vector3.down * _spawnDistance * index, 
+            Quaternion.identity);
         collectible.GetComponent<Collectible>().Collected += CollectTreasure;
     }
 
     private void CollectTreasure(Collectible obj)
     {
-        Debug.Log("Treasure collected");
         ScoresHolder.Scores++;
-        
-        Destroy(obj.gameObject);
     }
 
 }
