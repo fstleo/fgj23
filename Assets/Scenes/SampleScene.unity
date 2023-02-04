@@ -155,7 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rootLine: {fileID: 539795526}
   _growSpeed: 5
-  _growAngle: 40
+  _growTurnAngle: 40
+  _lengthBeforeTurn: 2
 --- !u!120 &539795526
 LineRenderer:
   m_ObjectHideFlags: 0
