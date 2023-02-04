@@ -7,7 +7,9 @@ public class CollectibleSpawner : MonoBehaviour
     [SerializeField]
     private GameObject[] _prefabs;
 
-    [SerializeField] private Collectible[] _predefinedCollectibles; 
+    [SerializeField] private Collectible[] _predefinedCollectibles;
+
+    [SerializeField] private float _offset;
     
     [SerializeField]
     private float _spawnDistance;
@@ -20,7 +22,7 @@ public class CollectibleSpawner : MonoBehaviour
         {
             collectible.Collected += CollectTreasure;
         }
-        for (int i = 0; i < _amount; i++)
+        for (int i = 1; i < _amount + 1; i++)
         {
             SpawnTreasure(i);       
         }
@@ -30,9 +32,13 @@ public class CollectibleSpawner : MonoBehaviour
     {
         var collectible = Instantiate(
             _prefabs[Random.Range(0, _prefabs.Length)],
-            transform.position + Quaternion.Euler(0,0, Random.Range(-60,60)) * Vector3.down * _spawnDistance * index, 
-            Quaternion.identity);
-        collectible.GetComponent<Collectible>().Collected += CollectTreasure;
+            transform.position + Quaternion.Euler(0,0, Random.Range(-60,60)) * Vector3.down * (_offset + _spawnDistance * index), 
+            Quaternion.identity).GetComponent<Collectible>();
+
+        if (collectible != null)
+        {
+            collectible.Collected += CollectTreasure;    
+        }
     }
 
     private void CollectTreasure(Collectible obj)

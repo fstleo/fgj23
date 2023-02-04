@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class Collectible : MonoBehaviour
 {
@@ -8,12 +9,17 @@ public class Collectible : MonoBehaviour
 
     public UnityEvent CollectedEffects;
     
+    [SerializeField]
+    private GameObject _particlesPrefab;
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Root"))
         {
             Collected?.Invoke(this);
             CollectedEffects?.Invoke();
+            Instantiate(_particlesPrefab);
+            Destroy(gameObject);
         }
     }
 }
