@@ -10,13 +10,15 @@ public class CollectibleSpawner : MonoBehaviour
     [SerializeField]
     private float _spawnDistance;
 
+    [SerializeField] private int _amount;
+    
     private void Awake()
     {
         foreach (var collectible in _predefinedCollectibles)
         {
             collectible.Collected += CollectTreasure;
         }
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < _amount; i++)
         {
             SpawnTreasure(i);       
         }

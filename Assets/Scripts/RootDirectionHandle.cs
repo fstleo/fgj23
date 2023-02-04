@@ -2,7 +2,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class RootDirectionHandle : MonoBehaviour, IDragHandler, IBeginDragHandler
+public class RootDirectionHandle : MonoBehaviour, IDragHandler, IBeginDragHandler,
+    IPointerDownHandler,
+    IEndDragHandler
 {
     private bool _isDragging;
     
@@ -11,6 +13,7 @@ public class RootDirectionHandle : MonoBehaviour, IDragHandler, IBeginDragHandle
     
     public void OnBeginDrag(PointerEventData eventData)
     {
+        CameraMovement.Locked = true;
         _isDragging = true;
     }
     
@@ -25,4 +28,13 @@ public class RootDirectionHandle : MonoBehaviour, IDragHandler, IBeginDragHandle
     }
 
 
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        CameraMovement.Locked = false;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        CameraMovement.Locked = true;
+    }
 }
