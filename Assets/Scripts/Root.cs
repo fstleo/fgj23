@@ -1,8 +1,12 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Root : MonoBehaviour
 {
+
+    public event Action Deadge;
     [SerializeField]
     private LineRenderer _rootLine;
     
@@ -20,12 +24,13 @@ public class Root : MonoBehaviour
 
     [SerializeField]
     private float _maxYBeforeForceTurnDown;
-    
+
     public Vector3 Direction { get; private set; } = Vector3.down;
 
     private float _nextSegmentLength;
     private float _length;
     private bool _isDecorative;
+    private readonly List<Root> _children = new List<Root>();
 
     public Vector3 EndPosition => transform.position + _rootLine.GetPosition(_rootLine.positionCount - 1);
 
@@ -82,9 +87,40 @@ public class Root : MonoBehaviour
         }
     }
 
+    public void Attach(Root child)
+    {
+        _children.Add(child);
+    }
+
+    public void Die()
+    {
+        Deadge?.Invoke();
+        SetDecorative();
+        foreach (var child in _children)
+        {
+            child.Die();            
+        }
+
+        var gradient = _rootLine.colorGradient;
+        gradient.SetKeys(
+    new []
+            {
+                new GradientColorKey(Color.red, 0),
+                // new GradientColorKey(Color.white, (_rootLine.positionCount/2f) / _rootLine.positionCount),
+                new GradientColorKey(Color.red, 1)
+            },
+    new []
+            {
+                new GradientAlphaKey(1,0),
+                new GradientAlphaKey(1,1),
+            }
+        );
+        _rootLine.colorGradient = gradient;
+    }
+
     private void TurnDownIfCloseToTheSurface(int lastIndex)
     {
-        if (_rootLine.GetPosition(lastIndex).y > _maxYBeforeForceTurnDown)
+        if (EndPosition.y > _maxYBeforeForceTurnDown)
         {
             var angle = Vector3.SignedAngle(Vector3.down, Direction, Vector3.forward);
             if (Mathf.Abs(angle) > 90)
