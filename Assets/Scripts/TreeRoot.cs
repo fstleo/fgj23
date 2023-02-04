@@ -26,7 +26,7 @@ public class TreeRoot : MonoBehaviour
     
     private void Awake()
     {
-        BranchOut(_rootPrefab.GetComponent<Root>(), transform.position);
+        BranchOut(Instantiate(_rootPrefab).GetComponent<Root>(), transform.position);
     }
 
     private void BranchOutFromRandomRoot()
@@ -47,6 +47,7 @@ public class TreeRoot : MonoBehaviour
         root.Attach(branch);
         if (decorative)  
         {
+            branch.Deactivate();
             branch.SetDecorative();
         }
         else
@@ -61,7 +62,7 @@ public class TreeRoot : MonoBehaviour
                 }
             };
             _activeRoots.Add(branch);
-            root.SetDecorative();
+            root.Deactivate();
             _activeRoots.Remove(root);
         }
         

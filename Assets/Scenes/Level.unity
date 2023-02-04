@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.43957293, g: 0.48795086, b: 0.56818205, a: 1}
+  m_IndirectSpecularColor: {r: 0.43957242, g: 0.4879502, b: 0.56818146, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4126,8 +4126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rootPrefab: {fileID: 2073200970134753839, guid: a18152f3fd7ba1a46a23f47e9eea7aa5, type: 3}
   _timeToCreateDecorativeBranch: 0.7
-  _timeBeforeBranchOut: 5
-  _chanceToBranchTwoAtOnce: 26
+  _timeBeforeBranchOut: 10
+  _chanceToBranchTwoAtOnce: 8
 --- !u!4 &1148477502
 Transform:
   m_ObjectHideFlags: 0
@@ -7662,7 +7662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6077619308046130033, guid: 19c09b8955ddc4846ab4783fd5b3e9c0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.478
       objectReference: {fileID: 0}
     - target: {fileID: 6077619308046130033, guid: 19c09b8955ddc4846ab4783fd5b3e9c0, type: 3}
       propertyPath: m_LocalRotation.w

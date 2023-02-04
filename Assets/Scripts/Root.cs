@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -29,7 +30,8 @@ public class Root : MonoBehaviour
 
     private float _nextSegmentLength;
     private float _length;
-    private bool _isDecorative;
+    private bool _isDeactivated;
+    private bool _isDeadge;
     private readonly List<Root> _children = new List<Root>();
 
     public Vector3 EndPosition => transform.position + _rootLine.GetPosition(_rootLine.positionCount - 1);
@@ -39,18 +41,28 @@ public class Root : MonoBehaviour
         _nextSegmentLength = _lengthBeforeTurn;
     }
 
-    public void SetDecorative()
+    public void Deactivate()
     {
-        _isDecorative = true;
+        _isDeactivated = true;
         for (int i = transform.childCount - 1; i >=0; i--)
         {
             Destroy(transform.GetChild(i).gameObject);
         }
     }
 
+    public void SetDecorative()
+    {
+        _rootLine.widthMultiplier = 0.03f;
+    }
+
     public void Update()
     {
-        if (_isDecorative && _length > _maximumDecorativeRootLength)
+        if (!_isDeadge && _children.Count > 0 && _children.All(child => child._isDeadge))
+        {
+            Die();
+            return;
+        }
+        if (_isDeactivated && _length > _maximumDecorativeRootLength)
         {
             return;
         }
@@ -94,8 +106,9 @@ public class Root : MonoBehaviour
 
     public void Die()
     {
+        _isDeadge = true;
         Deadge?.Invoke();
-        SetDecorative();
+        Deactivate();
         foreach (var child in _children)
         {
             child.Die();            
