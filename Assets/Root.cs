@@ -20,8 +20,12 @@ public class Root : MonoBehaviour, IDragHandler, IBeginDragHandler
 
     [SerializeField]
     private MeshCollider _meshCollider;
+
+    [SerializeField]
+    private float _directionChange;
     
     private Vector3 _direction = Vector3.down;
+    private bool _isDragging;
 
     public void Update()
     {
@@ -53,18 +57,21 @@ public class Root : MonoBehaviour, IDragHandler, IBeginDragHandler
     {
         _rootLine.positionCount++;
         _rootLine.SetPosition(lastIndex + 1, _rootLine.GetPosition(lastIndex));
-        // _direction = Quaternion.Euler(0, 0, Random.Range(-_growTurnAngle, _growTurnAngle)) * Vector3.down;
+        _direction = Quaternion.Euler(0, 0, Random.Range(-_growTurnAngle, _growTurnAngle)) * _direction;
     }
     
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("Begin drag");
+        _isDragging = true;
     }
     
     public void OnDrag(PointerEventData eventData)
     {
-        _direction = eventData.delta.normalized;
+        if (_isDragging)
+            _direction = eventData.delta.normalized;
+        _isDragging = false;
     }
+    
 
 }
 
