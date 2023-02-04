@@ -45,6 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45db2cde001af143869df341e651fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CollectedEffects:
+    m_PersistentCalls:
+      m_Calls: []
+  _particlesPrefab: {fileID: 8103840733726694024, guid: 56ed8be76af0ec86faf0763e81e97f8c, type: 3}
 --- !u!135 &2890490857735095669
 SphereCollider:
   m_ObjectHideFlags: 0
