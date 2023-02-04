@@ -167,6 +167,7 @@ MonoBehaviour:
   _growSpeed: 0.5
   _growTurnAngle: 30
   _lengthBeforeTurn: 0.2
+  _maxYBeforeForceTurnDown: -0.5
   _meshCollider: {fileID: 2073200970134753827}
 --- !u!64 &2073200970134753827
 MeshCollider:

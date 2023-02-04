@@ -14,6 +14,10 @@ public class Root : MonoBehaviour
     
     [SerializeField]
     private float _lengthBeforeTurn;
+    
+    
+    [SerializeField]
+    private float _maxYBeforeForceTurnDown;
 
     [SerializeField]
     private MeshCollider _meshCollider;
@@ -61,6 +65,16 @@ public class Root : MonoBehaviour
         var lastIndex = _rootLine.positionCount - 1;
         var increase = _growSpeed * Time.deltaTime;
         _rootLine.SetPosition(lastIndex, lastPosition + increase * Direction);
+
+        if (_rootLine.GetPosition(lastIndex).y > _maxYBeforeForceTurnDown)
+        {
+            var angle = Vector3.SignedAngle(Vector3.down, Direction, Vector3.forward);
+            if (Mathf.Abs(angle) > 90)
+            {
+                Direction = Quaternion.Euler(0, 0, -Mathf.Sign(angle) * 45) * Direction;
+            }
+        }
+
         if ((_rootLine.GetPosition(lastIndex) - _rootLine.GetPosition(lastIndex - 1)).sqrMagnitude >
             _nextSegmentLength * _nextSegmentLength)
         {
