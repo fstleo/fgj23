@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -34,13 +33,13 @@ public class Root : MonoBehaviour
     {
         GrowRoot();
         BakeCollision();
+        AdjustLineThickness();
+    }
+
+    private void AdjustLineThickness()
+    {
         var positionCount = _rootLine.positionCount;
         var widthCurve = _rootLine.widthCurve;
-        var keys = widthCurve.keys;
-        for (int i = 0; i < _rootLine.widthCurve.length; i++)
-        {
-            Debug.Log( keys[i].time);
-        }
         widthCurve.MoveKey(1, new Keyframe
         {
             time = 1f * (positionCount - 1) / positionCount,
@@ -48,7 +47,7 @@ public class Root : MonoBehaviour
         });
         _rootLine.widthCurve = widthCurve;
     }
-    
+
     private void BakeCollision()
     {
         var mesh = new Mesh();
@@ -69,7 +68,6 @@ public class Root : MonoBehaviour
         }
     }
     
-
     private void RandomTurn(int lastIndex)
     {
         _rootLine.positionCount++;
