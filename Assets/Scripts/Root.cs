@@ -61,7 +61,6 @@ public class Root : MonoBehaviour
         
         if (!_isDeadge && _children.Count > 0 && _children.All(child => child._isDeadge))
         {
-            Debug.LogError("All my children died, my time has come");
             Die();
             return;
         }

@@ -165,7 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rootLine: {fileID: 2073200970134753837}
   _growSpeed: 0.5
-  _growTurnAngle: 30
+  _growTurnAngle: 15
   _lengthBeforeTurn: 0.2
   _maximumDecorativeRootLength: 0.3
   _maxYBeforeForceTurnDown: -0.5

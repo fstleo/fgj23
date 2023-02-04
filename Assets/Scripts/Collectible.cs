@@ -17,7 +17,7 @@ public class Collectible : MonoBehaviour
         {
             Collected?.Invoke(this);
             CollectedEffects?.Invoke();
-            Instantiate(_particlesPrefab);
+            Instantiate(_particlesPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
