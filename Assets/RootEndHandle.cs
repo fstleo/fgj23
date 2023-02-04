@@ -30,7 +30,7 @@ public class RootEndHandle : MonoBehaviour, IDragHandler, IBeginDragHandler
     {
         if (_isDragging)
         {
-            _root.SetDirection(eventData.delta.normalized);
+            _root.SetDirection(eventData.delta);
         }
 
         _isDragging = false;

@@ -4,7 +4,8 @@ using Random = UnityEngine.Random;
 
 public class Root : MonoBehaviour
 {
-
+    public event Action<Root, Vector3> TimeToBranch;
+    
     [SerializeField]
     private LineRenderer _rootLine;
     
@@ -20,9 +21,17 @@ public class Root : MonoBehaviour
     [SerializeField]
     private MeshCollider _meshCollider;
     
-    private Vector3 _direction = Vector3.down;
+    public Vector3 Direction { get; private set; } = Vector3.down;
 
-    public Vector3 EndPosition => _rootLine.GetPosition(_rootLine.positionCount - 1);
+    private float _nextSegmentLength;
+    private float _branchLength;
+
+    public Vector3 EndPosition => transform.position + _rootLine.GetPosition(_rootLine.positionCount - 1);
+
+    private void Awake()
+    {
+        _nextSegmentLength = _lengthBeforeTurn;
+    }
 
     public void Update()
     {
@@ -41,25 +50,27 @@ public class Root : MonoBehaviour
     {
         var lastPosition = _rootLine.GetPosition(_rootLine.positionCount - 1);
         var lastIndex = _rootLine.positionCount - 1;
-        _rootLine.SetPosition(lastIndex, lastPosition + _growSpeed * _direction * Time.deltaTime);
-
+        var increase = _growSpeed * Time.deltaTime;
+        _rootLine.SetPosition(lastIndex, lastPosition + increase * Direction);
         if ((_rootLine.GetPosition(lastIndex) - _rootLine.GetPosition(lastIndex - 1)).sqrMagnitude >
-            _lengthBeforeTurn * _lengthBeforeTurn)
+            _nextSegmentLength * _nextSegmentLength)
         {
-            Turn(lastIndex);
+            RandomTurn(lastIndex);
         }
     }
+    
 
-    private void Turn(int lastIndex)
+    private void RandomTurn(int lastIndex)
     {
         _rootLine.positionCount++;
         _rootLine.SetPosition(lastIndex + 1, _rootLine.GetPosition(lastIndex));
-        _direction = Quaternion.Euler(0, 0, Random.Range(-_growTurnAngle, _growTurnAngle)) * _direction;
+        Direction = Quaternion.Euler(0, 0, Random.Range(-_growTurnAngle, _growTurnAngle)) * Direction;
+        _nextSegmentLength = Random.Range(_lengthBeforeTurn / 2, _lengthBeforeTurn);
     }
     
     public void SetDirection(Vector3 direction)
     {
-        _direction = direction;
+        Direction = direction.normalized;
     }
 }
 
