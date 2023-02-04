@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,6 +14,10 @@ public class Root : MonoBehaviour
     
     [SerializeField]
     private float _lengthBeforeTurn;
+    
+    
+    [SerializeField]
+    private float _maxYBeforeForceTurnDown;
 
     [SerializeField]
     private MeshCollider _meshCollider;
@@ -34,13 +37,13 @@ public class Root : MonoBehaviour
     {
         GrowRoot();
         BakeCollision();
+        AdjustLineThickness();
+    }
+
+    private void AdjustLineThickness()
+    {
         var positionCount = _rootLine.positionCount;
         var widthCurve = _rootLine.widthCurve;
-        var keys = widthCurve.keys;
-        for (int i = 0; i < _rootLine.widthCurve.length; i++)
-        {
-            Debug.Log( keys[i].time);
-        }
         widthCurve.MoveKey(1, new Keyframe
         {
             time = 1f * (positionCount - 1) / positionCount,
@@ -48,7 +51,7 @@ public class Root : MonoBehaviour
         });
         _rootLine.widthCurve = widthCurve;
     }
-    
+
     private void BakeCollision()
     {
         var mesh = new Mesh();
@@ -62,6 +65,16 @@ public class Root : MonoBehaviour
         var lastIndex = _rootLine.positionCount - 1;
         var increase = _growSpeed * Time.deltaTime;
         _rootLine.SetPosition(lastIndex, lastPosition + increase * Direction);
+
+        if (_rootLine.GetPosition(lastIndex).y > _maxYBeforeForceTurnDown)
+        {
+            var angle = Vector3.SignedAngle(Vector3.down, Direction, Vector3.forward);
+            if (Mathf.Abs(angle) > 90)
+            {
+                Direction = Quaternion.Euler(0, 0, -Mathf.Sign(angle) * 45) * Direction;
+            }
+        }
+
         if ((_rootLine.GetPosition(lastIndex) - _rootLine.GetPosition(lastIndex - 1)).sqrMagnitude >
             _nextSegmentLength * _nextSegmentLength)
         {
@@ -69,7 +82,6 @@ public class Root : MonoBehaviour
         }
     }
     
-
     private void RandomTurn(int lastIndex)
     {
         _rootLine.positionCount++;
