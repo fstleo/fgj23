@@ -79,7 +79,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.117120326
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -163,11 +163,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rootLine: {fileID: 2073200970134753837}
-  _growSpeed: 5
+  _growSpeed: 0.5
   _growTurnAngle: 30
-  _lengthBeforeTurn: 2
+  _lengthBeforeTurn: 0.2
   _meshCollider: {fileID: 2073200970134753827}
-  _lengthBeforeBranching: 30
 --- !u!64 &2073200970134753827
 MeshCollider:
   m_ObjectHideFlags: 0
