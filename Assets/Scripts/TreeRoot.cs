@@ -17,6 +17,7 @@ public class TreeRoot : MonoBehaviour
     private readonly List<Root> _roots = new List<Root>();
 
     private float _branchOutTimer;
+    private float _decorationTimer;
     
     private void Awake()
     {
@@ -33,17 +34,40 @@ public class TreeRoot : MonoBehaviour
         }
     }
 
-    private void BranchOut(Root root, Vector3 position)
+    private void BranchOut(Root root, Vector3 position, bool decorative = false)
     {
         var branch = Instantiate(_rootPrefab, position, Quaternion.identity).GetComponent<Root>();
-        branch.SetDirection(root.Direction);
-        _roots.Add(branch);
+        branch.SetDirection(Quaternion.Euler(0,0,Random.Range(-1f, 1f) * Random.Range(60,120)) * root.Direction);
+        
+        if (decorative)
+        {
+            branch.SetDecorative();
+        }
+        else
+        {
+            _roots.Add(branch);    
+        }
+        
     }
 
+    private void BranchOutDecorative()
+    {
+        foreach (var root in _roots)
+        {
+            BranchOut(root, root.EndPosition, true);    
+        }
+        
+    }
 
     private void Update()
     {
         _branchOutTimer += Time.deltaTime;
+        _decorationTimer += Time.deltaTime;
+        if (_decorationTimer > 0.4f)
+        {
+            BranchOutDecorative();
+            _decorationTimer = 0;
+        }
         if (_branchOutTimer > _timeBeforeBranchOut)
         {
             BranchOutFromRandomRoot();

@@ -1,39 +1,55 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class CameraMovement : MonoBehaviour, IBeginDragHandler, IDragHandler
+public class CameraMovement : MonoBehaviour
 {
     [SerializeField] 
     private float _maxY;
+
+    [SerializeField] private Camera _camera;
     
-    [SerializeField]
     private Transform _cameraTransform;
 
-    private Vector3 _delta;
+    [SerializeField]
+    private float _mouseSensitivity;
     
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        Debug.Log("OnBeginDrag: " + eventData.pointerPressRaycast.screenPosition);
+    [SerializeField]
+    private float _zoomSensitivity;
+    
+    private Vector3 _delta;
+    private Vector3 _startDragPosition;
+    
+    public static bool Locked { get; set; }
 
-        // Obtain the position of the hit GameObject.
-        _delta = eventData.pointerPressRaycast.worldPosition;
-        _delta = _delta - transform.position;
+    private void Awake()
+    {
+        _cameraTransform = transform;
     }
 
-    public void OnDrag(PointerEventData eventData)
+    private void Update()
     {
-        var newPosition = eventData.pointerCurrentRaycast.worldPosition - _delta;
-
-        if (eventData.pointerCurrentRaycast.worldPosition.x == 0.0f ||
-            eventData.pointerCurrentRaycast.worldPosition.y == 0.0f)
+        if (Locked)
         {
-            newPosition = eventData.delta;
-
-            _cameraTransform.Translate(newPosition * Time.deltaTime);
             return;
         }
+        if (Input.GetMouseButtonDown(0))
+        {
+            _startDragPosition = Input.mousePosition;
+        }
 
-        _cameraTransform.position = newPosition;
+        if (Input.GetMouseButton(0))
+        {
+            _delta = Input.mousePosition - _startDragPosition;
+            var position = _cameraTransform.position;
+            position = new Vector3(
+                position.x - _delta.x * _mouseSensitivity,
+                Mathf.Min(position.y - _delta.y * _mouseSensitivity, _maxY),
+                position.z);
+            _cameraTransform.position = position;
+            _startDragPosition = Input.mousePosition;
+        }
+        
+        _camera.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * _zoomSensitivity;
+
     }
-
+    
 }
