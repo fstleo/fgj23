@@ -33,6 +33,7 @@ public class Root : MonoBehaviour
     private bool _isDeactivated;
     private bool _isDeadge;
     private readonly List<Root> _children = new List<Root>();
+    private readonly List<Root> _decor = new List<Root>();
 
     public Vector3 EndPosition => transform.position + _rootLine.GetPosition(_rootLine.positionCount - 1);
 
@@ -57,8 +58,10 @@ public class Root : MonoBehaviour
 
     public void Update()
     {
+        
         if (!_isDeadge && _children.Count > 0 && _children.All(child => child._isDeadge))
         {
+            Debug.LogError("All my children died, my time has come");
             Die();
             return;
         }
@@ -103,15 +106,27 @@ public class Root : MonoBehaviour
     {
         _children.Add(child);
     }
+    
+    public void AttachDecoration(Root child)
+    {
+        _decor.Add(child);
+    }
 
     public void Die()
     {
+        if (_isDeadge)
+            return;
         _isDeadge = true;
         Deadge?.Invoke();
         Deactivate();
         foreach (var child in _children)
         {
             child.Die();            
+        }
+
+        foreach (var decor in _decor)
+        {
+            decor.Die();
         }
 
         var gradient = _rootLine.colorGradient;

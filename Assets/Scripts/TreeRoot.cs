@@ -44,14 +44,15 @@ public class TreeRoot : MonoBehaviour
     {
         var branch = Instantiate(_rootPrefab, position, Quaternion.identity).GetComponent<Root>();
         branch.SetDirection(Quaternion.Euler(0,0,Random.Range(-1f, 1f) * Random.Range(60,120)) * root.Direction);
-        root.Attach(branch);
         if (decorative)  
         {
             branch.Deactivate();
             branch.SetDecorative();
+            root.AttachDecoration(branch);
         }
         else
         {
+            root.Attach(branch);
             branch.Deadge += () =>
             {
                 _activeRoots.Remove(branch);
