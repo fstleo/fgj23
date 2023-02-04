@@ -45,6 +45,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adcc7e8a7b324b12b7c0e2199d1c438b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1183618658198788271}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Hit
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &723831153895929090
 SphereCollider:
   m_ObjectHideFlags: 0
