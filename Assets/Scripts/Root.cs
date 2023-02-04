@@ -4,8 +4,6 @@ using Random = UnityEngine.Random;
 
 public class Root : MonoBehaviour
 {
-    public event Action<Root, Vector3> TimeToBranch;
-    
     [SerializeField]
     private LineRenderer _rootLine;
     
@@ -24,7 +22,6 @@ public class Root : MonoBehaviour
     public Vector3 Direction { get; private set; } = Vector3.down;
 
     private float _nextSegmentLength;
-    private float _branchLength;
 
     public Vector3 EndPosition => transform.position + _rootLine.GetPosition(_rootLine.positionCount - 1);
 
@@ -37,6 +34,19 @@ public class Root : MonoBehaviour
     {
         GrowRoot();
         BakeCollision();
+        var positionCount = _rootLine.positionCount;
+        var widthCurve = _rootLine.widthCurve;
+        var keys = widthCurve.keys;
+        for (int i = 0; i < _rootLine.widthCurve.length; i++)
+        {
+            Debug.Log( keys[i].time);
+        }
+        widthCurve.MoveKey(1, new Keyframe
+        {
+            time = 1f * (positionCount - 1) / positionCount,
+            value = 1f
+        });
+        _rootLine.widthCurve = widthCurve;
     }
     
     private void BakeCollision()
