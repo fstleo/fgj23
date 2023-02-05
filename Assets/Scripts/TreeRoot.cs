@@ -26,7 +26,23 @@ public class TreeRoot : MonoBehaviour
 
     private float _branchOutTimer;
     private float _decorationTimer;
-    public static int ActiveRoots { get; set; }
+    
+    private static int _activeRootsCount;
+
+    public static int ActiveRoots
+    {
+        get => _activeRootsCount;
+        private set
+        {
+            if (_activeRootsCount > MaximumActiveRoots)
+            {
+                MaximumActiveRoots = _activeRootsCount;
+            }
+            _activeRootsCount = value;
+        }
+    }
+
+    public static int MaximumActiveRoots { get; private set; }
 
     private void Awake()
     {
