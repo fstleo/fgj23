@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -308,8 +308,8 @@ Camera:
   m_GameObject: {fileID: 1530592843}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.34901962, g: 0.57254905, b: 0.5686275, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -429,6 +429,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 832942102595012694, guid: 3ad7bf348cc059e4b8dd43a7eb6fea86, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 15.801025
+      objectReference: {fileID: 0}
     - target: {fileID: 6179247709367520597, guid: 3ad7bf348cc059e4b8dd43a7eb6fea86, type: 3}
       propertyPath: m_RootOrder
       value: 4
