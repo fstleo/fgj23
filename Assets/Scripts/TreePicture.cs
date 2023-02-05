@@ -7,9 +7,22 @@ public class TreePicture : MonoBehaviour
     private class PictureThreshold
     {
         public int Score;
+        public int ActiveRootsNeeded;
         public GameObject Picture;
     }
 
+    public static int RootsNeeded
+    {
+        get;
+        private set;
+    }
+    
+    public static int NextLevelScore
+    {
+        get;
+        private set;
+    }
+    
     [SerializeField]
     private PictureThreshold [] _thresholds;
 
@@ -18,6 +31,7 @@ public class TreePicture : MonoBehaviour
     private void Awake()
     {
         ScoresHolder.ScoreChange += CheckThreshold;
+        RootsNeeded = _thresholds[_currentThreshold].ActiveRootsNeeded;
     }
 
     private void CheckThreshold(int scores)
@@ -28,7 +42,10 @@ public class TreePicture : MonoBehaviour
         {
             _thresholds[_currentThreshold].Picture.SetActive(false);
             _currentThreshold++;
-            _thresholds[_currentThreshold].Picture.SetActive(true);
+            var currentLevel = _thresholds[_currentThreshold];
+            RootsNeeded = currentLevel.ActiveRootsNeeded;
+            NextLevelScore = _thresholds[_currentThreshold + 1].Score;
+            currentLevel.Picture.SetActive(true);
             SoundManager.PlaySound(SoundId.LevelUp);
         }
     }

@@ -4298,10 +4298,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _thresholds:
   - Score: 0
+    ActiveRootsNeeded: 1
+    Picture: {fileID: 1826144144}
+  - Score: 5
+    ActiveRootsNeeded: 2
     Picture: {fileID: 1826144144}
   - Score: 15
+    ActiveRootsNeeded: 3
     Picture: {fileID: 1656146133}
-  - Score: 30
+  - Score: 25
+    ActiveRootsNeeded: 4
+    Picture: {fileID: 1656146133}
+  - Score: 40
+    ActiveRootsNeeded: 5
+    Picture: {fileID: 1776894351}
+  - Score: 50
+    ActiveRootsNeeded: 6
+    Picture: {fileID: 1776894351}
+  - Score: 75
+    ActiveRootsNeeded: 7
+    Picture: {fileID: 1776894351}
+  - Score: 100
+    ActiveRootsNeeded: 8
+    Picture: {fileID: 1776894351}
+  - Score: 130
+    ActiveRootsNeeded: 9
+    Picture: {fileID: 1776894351}
+  - Score: 160
+    ActiveRootsNeeded: 10
+    Picture: {fileID: 1776894351}
+  - Score: 200
+    ActiveRootsNeeded: 11
     Picture: {fileID: 1776894351}
 --- !u!1001 &1237344502
 PrefabInstance:

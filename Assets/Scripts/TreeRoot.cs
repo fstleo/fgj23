@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public class TreeRoot : MonoBehaviour
 {
     public event Action Deadge;
+    
     [SerializeField]
     private GameObject _rootPrefab;
 
@@ -25,7 +26,8 @@ public class TreeRoot : MonoBehaviour
 
     private float _branchOutTimer;
     private float _decorationTimer;
-    
+    public static int ActiveRoots { get; set; }
+
     private void Awake()
     {
         BranchOut(Instantiate(_rootPrefab).GetComponent<Root>(), transform.position);
@@ -58,15 +60,13 @@ public class TreeRoot : MonoBehaviour
             branch.Deadge += () =>
             {
                 _activeRoots.Remove(branch);
-                if (_activeRoots.Count == 0)
-                {
-                    _treeDeadge = true;
-                    Deadge?.Invoke();
-                }
+                ActiveRoots = _activeRoots.Count;
             };
             _activeRoots.Add(branch);
+            
             root.Deactivate();
             _activeRoots.Remove(root);
+            ActiveRoots = _activeRoots.Count;
         }
         
     }
@@ -86,6 +86,13 @@ public class TreeRoot : MonoBehaviour
         {
             return;
         }
+        
+        if (_activeRoots.Count < TreePicture.RootsNeeded)
+        {
+            _treeDeadge = true;
+            Deadge?.Invoke();
+        }
+        
         _branchOutTimer += Time.deltaTime;
         _decorationTimer += Time.deltaTime;
         if (_decorationTimer > _timeToCreateDecorativeBranch)
