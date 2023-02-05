@@ -76,6 +76,7 @@ public class CollectibleSpawner : MonoBehaviour
     private void CollectTreasure(Collectible obj)
     {
         ScoresHolder.Scores++;
+        obj.Collected -= CollectTreasure;
     }
 
 }

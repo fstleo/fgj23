@@ -35,6 +35,11 @@ public class TreePicture : MonoBehaviour
         NextLevelScore = _thresholds[_currentThreshold + 1].Score;
     }
 
+    private void OnDestroy()
+    {
+        ScoresHolder.ScoreChange -= CheckThreshold;
+    }
+
     private void CheckThreshold(int scores)
     {
         if (_currentThreshold == _thresholds.Length - 1)
