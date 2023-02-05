@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 0
-  m_AmbientMode: 0
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
+  m_AmbientEquatorColor: {r: 0.20163757, g: 0.6037736, b: 0.5674486, a: 1}
+  m_AmbientGroundColor: {r: 0.7924528, g: 0.16746168, b: 0.3085841, a: 1}
+  m_AmbientIntensity: 2.55
+  m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -35,10 +35,10 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 1
+  m_ReflectionIntensity: 0.159
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.45106912, g: 0.50089025, b: 0.5741339, a: 1}
+  m_IndirectSpecularColor: {r: 0.18021154, g: 0.20336747, b: 0.23740974, a: 0.159}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 27c7357b9b9e92f44a56cf9d9fa1835a, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -2239,7 +2239,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.9681086, b: 0.88113207, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.71
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4550,7 +4550,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.527127, g: 0.5939893, b: 0.6320754, a: 1}
-  m_Intensity: 0.39
+  m_Intensity: 0.21
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -7384,6 +7384,10 @@ PrefabInstance:
     - target: {fileID: 1102443695012259802, guid: 53f086126cb57f647a4c9167d21855a5, type: 3}
       propertyPath: m_Name
       value: GameMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1102443695012259802, guid: 53f086126cb57f647a4c9167d21855a5, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6182968814619645077, guid: 53f086126cb57f647a4c9167d21855a5, type: 3}
       propertyPath: m_RootOrder
