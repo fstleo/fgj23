@@ -158,6 +158,9 @@ MonoBehaviour:
   - _id: 4
     _clips:
     - {fileID: 8300000, guid: 03bde3aca0b31be40a9936ddd36132bb, type: 3}
+  - _id: 5
+    _clips:
+    - {fileID: 8300000, guid: b827c69f4db2f594e9d639d34851a36c, type: 3}
 --- !u!82 &1310717038645372795
 AudioSource:
   m_ObjectHideFlags: 0
