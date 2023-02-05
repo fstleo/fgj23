@@ -1,38 +1,67 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class CollectibleSpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] _prefabs;
+    private GameObject[] _goods;
 
-    [SerializeField] private Collectible[] _predefinedCollectibles;
+    [SerializeField]
+    private GameObject[] _bads;
 
-    [SerializeField] private float _offset;
+    
+    [SerializeField] private float _goodWeight;
+    [SerializeField] private float _badWeight;
+    [SerializeField] private float _emptyWeight;
     
     [SerializeField]
-    private float _spawnDistance;
+    private int _spawnDistance;
 
-    [SerializeField] private int _amount;
+    [SerializeField]
+    private int _notSpawnRadius;
+    
+    [SerializeField]
+    private int _step;
+    
+    private float _maxWeight;
+    private int _goodChance;
+    private int _badChance;
     
     private void Awake()
     {
-        foreach (var collectible in _predefinedCollectibles)
+        _maxWeight = _goodWeight + _badWeight + _emptyWeight;
+        _goodChance = Mathf.RoundToInt(100*_goodWeight / _maxWeight);
+        _badChance = Mathf.RoundToInt(100*_badWeight / _maxWeight);
+        
+        for (int i = -_spawnDistance; i < _spawnDistance; i+=_step)
+        for (int j = -_spawnDistance; j < 0; j+= _step)
         {
-            collectible.Collected += CollectTreasure;
-        }
-        for (int i = 1; i < _amount + 1; i++)
-        {
-            SpawnTreasure(i);       
+            if (Mathf.Abs(i) < _notSpawnRadius && Mathf.Abs(j) < _notSpawnRadius)
+            {
+                continue;
+            }
+            SpawnTreasure(i, j);       
         }
     }
 
-    private void SpawnTreasure(int index)
+    private void SpawnTreasure(int x, int y)
     {
+        GameObject prefab;
+        var randomThing = Random.Range(0, 100);
+        if (randomThing <= _goodChance)
+        {
+            prefab = _goods[Random.Range(0, _goods.Length)];
+        }
+        else if (randomThing < _goodChance + _badChance)
+        {
+            prefab = _bads[Random.Range(0, _goods.Length)];
+        }
+        else return;
         var collectible = Instantiate(
-            _prefabs[Random.Range(0, _prefabs.Length)],
-            transform.position + Quaternion.Euler(0,0, Random.Range(-60,60)) * Vector3.down * (_offset + _spawnDistance * index), 
+            prefab,
+             new Vector3(Random.Range(x, x+_step), Random.Range(y, y+_step), 0),
             Quaternion.Euler(Random.Range(0,360), Random.Range(0,360),Random.Range(0,360))).GetComponent<Collectible>();
 
         if (collectible != null)
