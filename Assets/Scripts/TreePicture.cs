@@ -13,6 +13,8 @@ public class TreePicture : MonoBehaviour
     [SerializeField]
     private PictureThreshold [] _thresholds;
 
+    private int _currentThreshold = 0;
+
     private void Awake()
     {
         ScoresHolder.ScoreChange += CheckThreshold;
@@ -20,19 +22,14 @@ public class TreePicture : MonoBehaviour
 
     private void CheckThreshold(int scores)
     {
-        for (int i = _thresholds.Length - 1; i >= 0; i--)
+        if (_currentThreshold == _thresholds.Length - 1)
+            return;
+        if (_thresholds[_currentThreshold + 1].Score <= scores)
         {
-            _thresholds[i].Picture.SetActive(false);
-        }
-
-        for (int i = _thresholds.Length - 1; i >= 0; i--)
-        {
-            var pictureThreshold = _thresholds[i];
-            if (scores >= pictureThreshold.Score)
-            {
-                pictureThreshold.Picture.SetActive(true);
-                return;
-            }
+            _thresholds[_currentThreshold].Picture.SetActive(false);
+            _currentThreshold++;
+            _thresholds[_currentThreshold].Picture.SetActive(true);
+            SoundManager.PlaySound(SoundId.LevelUp);
         }
     }
 }
