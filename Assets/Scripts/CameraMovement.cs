@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
@@ -20,8 +21,11 @@ public class CameraMovement : MonoBehaviour
     
     public static bool Locked { get; set; }
 
+    private Game _gameInstance;
+
     private void Awake()
     {
+        Locked = false;
         _cameraTransform = transform;
     }
 
@@ -51,5 +55,24 @@ public class CameraMovement : MonoBehaviour
         _camera.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * _zoomSensitivity;
 
     }
-    
+
+    public void Init(Game gameInstance)
+    {
+        gameInstance.GameStateChange += GameStateChange;
+        _gameInstance = gameInstance;
+    }
+
+    private void OnDestroy()
+    {
+        _gameInstance.GameStateChange -= GameStateChange;
+    }
+
+    private void GameStateChange(GameState state)
+    {
+        Locked = state != GameState.Game;
+        if (state == GameState.GameOver)
+        {
+            _cameraTransform.position = new Vector3(0, 0, _cameraTransform.position.z);
+        }
+    }
 }
