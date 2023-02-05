@@ -4976,7 +4976,7 @@ GameObject:
   - component: {fileID: 6456930314995733924}
   - component: {fileID: 8405086240853688205}
   m_Layer: 0
-  m_Name: DangerousThingy
+  m_Name: PoisonBottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
