@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class TreeRoot : MonoBehaviour
 {
+    public event Action Deadge;
     [SerializeField]
     private GameObject _rootPrefab;
 
@@ -59,7 +61,7 @@ public class TreeRoot : MonoBehaviour
                 if (_activeRoots.Count == 0)
                 {
                     _treeDeadge = true;
-                    //gameover
+                    Deadge?.Invoke();
                 }
             };
             _activeRoots.Add(branch);

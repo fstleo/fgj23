@@ -15,18 +15,18 @@ public class SceneSwitcher
     {
         if (state == GameState.Game && _previousState != GameState.Pause)
         {
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("Level");
         }
         
         if (state == GameState.MainMenu)
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("Menu");
         }
 
-        if (state == GameState.GameOver)
-        {
-            SceneManager.LoadScene("GameOver");
-        }
+        // if (state == GameState.GameOver)
+        // {
+        //     SceneManager.LoadScene("GameOver");
+        // }
 
         _previousState = state;
     }
