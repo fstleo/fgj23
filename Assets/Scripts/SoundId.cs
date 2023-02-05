@@ -4,5 +4,6 @@
     TreasurePickUp,
     BottleBreak,
     RabbitChewing,
-    LevelUp
+    LevelUp,
+    GameOver
 }

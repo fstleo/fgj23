@@ -106,6 +106,7 @@ public class TreeRoot : MonoBehaviour
         if (_activeRoots.Count < TreePicture.RootsNeeded)
         {
             _treeDeadge = true;
+            SoundManager.PlaySound(SoundId.GameOver);
             Deadge?.Invoke();
         }
         
