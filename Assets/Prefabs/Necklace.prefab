@@ -48,7 +48,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollectedEffects:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -7452975377270652728}
+        m_TargetAssemblyTypeName: PlaySoundAnimationEvent, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _particlesPrefab: {fileID: 8103840733726694024, guid: 56ed8be76af0ec86faf0763e81e97f8c, type: 3}
 --- !u!135 &2890490857735095669
 SphereCollider:
