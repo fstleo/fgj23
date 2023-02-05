@@ -58,11 +58,14 @@ public class CollectibleSpawner : MonoBehaviour
         {
             prefab = _bads[Random.Range(0, _goods.Length)];
         }
-        else return;
+        else
+        {
+            return;
+        }
         var collectible = Instantiate(
             prefab,
              new Vector3(Random.Range(x, x+_step), Random.Range(y, y+_step), 0),
-            Quaternion.identity).GetComponent<Collectible>();
+            Quaternion.identity).GetComponentInChildren<Collectible>();
 
         if (collectible != null)
         {
