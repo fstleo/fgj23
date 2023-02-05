@@ -3,5 +3,6 @@
     Click,
     TreasurePickUp,
     BottleBreak,
-    RabbitChewing
+    RabbitChewing,
+    LevelUp
 }

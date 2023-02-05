@@ -33,7 +33,7 @@ public class CollectibleSpawner : MonoBehaviour
         var collectible = Instantiate(
             _prefabs[Random.Range(0, _prefabs.Length)],
             transform.position + Quaternion.Euler(0,0, Random.Range(-60,60)) * Vector3.down * (_offset + _spawnDistance * index), 
-            Quaternion.identity).GetComponent<Collectible>();
+            Quaternion.Euler(Random.Range(0,360), Random.Range(0,360),Random.Range(0,360))).GetComponent<Collectible>();
 
         if (collectible != null)
         {

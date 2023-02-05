@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4392917685891187450}
   - component: {fileID: 1139473453625895214}
   - component: {fileID: 2890490857735095669}
+  - component: {fileID: -7452975377270652728}
   m_Layer: 0
   m_Name: Necklace
   m_TagString: Untagged
@@ -62,6 +63,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7452975377270652728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4191961092489963314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf71652e44b44419889c311c19b76f26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundId: 1
 --- !u!1001 &1355312476271118384
 PrefabInstance:
   m_ObjectHideFlags: 0
