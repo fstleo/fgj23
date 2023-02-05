@@ -5,10 +5,14 @@ public class GameInstaller : Installer
 {
 
     [SerializeField] private TreeRoot _tree;
+    [SerializeField] private CameraMovement _cameraMovement;
+    
+    
     
     protected override void Initialize()
     {
         _tree.Deadge += () => GameInstance.GameOver();
+        _cameraMovement.Init(GameInstance);
     }
 
     private void Update()
